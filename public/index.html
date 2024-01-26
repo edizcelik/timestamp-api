@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Timestamp Microservice</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+
+    <script defer>
+      fetch("/api/2015-12-25")
+        .then((res) => res.json())
+        .then(
+          (result) =>
+            (document.querySelector("#example-response").textContent =
+              JSON.stringify(result))
+        );
+    </script>
+  </head>
+
+  <body>
+    <h1>Timestamp Microservice</h1>
+    <hr />
+    <div class="container">
+      <h2>Example Usage:</h2>
+      <ul>
+        <li><a href="api/2015-12-25">/api/2015-12-25</a></li>
+        <li><a href="api/1451001600000">/api/1451001600000</a></li>
+      </ul>
+
+      <h2>Example Output:</h2>
+      <p>
+        <code id="example-response" />
+      </p>
+    </div>
+  </body>
+</html>
