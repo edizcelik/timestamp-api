@@ -15,13 +15,18 @@ app.get("/api/:date?", (req: Request, res: Response) => {
       ? new Date(req.params.date)
       : new Date(unixNumber);
 
-    res.json({
-      unix: date.getTime(),
-      utc: date.toUTCString(),
-    });
+    if (date instanceof Date && !Number.isNaN(date.getTime())) {
+      res.status(200).json({
+        unix: date.getTime(),
+        utc: date.toUTCString(),
+      });
+    } else {
+      res.status(400).json({
+        error: "Invalid Date",
+      });
+    }
   } catch (error) {
-    res.status(400);
-    res.json({
+    res.status(400).json({
       error: "Invalid Date",
     });
   }
