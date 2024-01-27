@@ -1,11 +1,13 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
+app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
 app.use(express.static("public"));
 
 app.get("/api/:date?", (req: Request, res: Response) => {
