@@ -13,9 +13,13 @@ app.use(express.static("public"));
 app.get("/api/:date?", (req: Request, res: Response) => {
   try {
     const unixNumber = Number(req.params.date);
-    const date = Number.isNaN(unixNumber)
-      ? new Date(req.params.date)
-      : new Date(unixNumber);
+    let date;
+
+    if (Number.isNaN(unixNumber)) {
+      date = req.params.date ? new Date(req.params.date) : new Date();
+    } else {
+      date = new Date(unixNumber);
+    }
 
     if (date instanceof Date && !Number.isNaN(date.getTime())) {
       res.status(200).json({
